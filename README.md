@@ -15,6 +15,10 @@
 | birthday_month  | integer  | null: false |
 | birthday_date   | integer  | null: false |
 
+### Association
+- has_many :items
+- has_many :Purchases
+
 
 ## Items テーブル
 
@@ -30,7 +34,11 @@
 | price        | integer    | null: false       |
 | user         | references | foreign_key: true |
 
-## Purchase テーブル
+### Association
+- belongs_to :user
+- has_one :purchase
+
+## Purchases テーブル
 
 | Column         | Type       | Options           |
 | -------------- | ---------- | ----------------- |
@@ -41,7 +49,11 @@
 | user           | references | foreign_key: true |
 | item           | references | foreign_key: true |
 
-## Deliver テーブル
+### Association
+- belongs_to :item
+- has_one :recipient
+
+## Recipients テーブル
 
 | Column       | Type       | Options           |
 | ------------ | ---------- | ----------------- |
@@ -52,3 +64,7 @@
 | building     | string     | null: false       |
 | telephone    | integer    | null: false       |
 | purchase     | references | foreign_key: true |
+
+### Association
+-belongs_to :purchase
+
