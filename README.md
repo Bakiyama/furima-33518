@@ -1,24 +1,54 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column          | Type     | Options     |
+| --------------- | -------- | ----------- |
+| email           | string   | null: false |
+| password        | string   | null: false |
+| nickname        | string   | null: false |
+| lastname_kanji  | string   | null: false |
+| firstname_kanji | string   | null: false |
+| lastname_kana   | string   | null: false |
+| firstname_kana  | string   | null: false |
+| birthday_year   | integer  | null: false |
+| birthday_month  | integer  | null: false |
+| birthday_date   | integer  | null: false |
 
-* Ruby version
 
-* System dependencies
+## Items テーブル
 
-* Configuration
+| Column       | Type       | Options           |
+| ------------ | ---------- | ----------------- |
+| name         | string     | null: false       |
+| explain      | text       | null: false       |
+| category     | integer    | null: false       |
+| condition    | integer    | null: false       |
+| deliver_fee  | integer    | null: false       |
+| area_from    | integer    | null: false       |
+| ship         | integer    | null: false       |
+| price        | integer    | null: false       |
+| user         | references | foreign_key: true |
 
-* Database creation
+## Purchase テーブル
 
-* Database initialization
+| Column         | Type       | Options           |
+| -------------- | ---------- | ----------------- |
+| card_num       | integer    | null: false       |
+| expire_month   | integer    | null: false       |
+| expire_year    | integer    | null: false       |
+| security_num   | integer    | null: false       |
+| user           | references | foreign_key: true |
+| item           | references | foreign_key: true |
 
-* How to run the test suite
+## Deliver テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+| Column       | Type       | Options           |
+| ------------ | ---------- | ----------------- |
+| postal_code  | integer    | null: false       |
+| prefecture   | integer    | null: false       |
+| city         | string     | null: false       |
+| address      | string     | null: false       |
+| building     | string     | null: false       |
+| telephone    | integer    | null: false       |
+| purchase     | references | foreign_key: true |
