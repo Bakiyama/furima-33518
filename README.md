@@ -2,22 +2,22 @@
 
 ## users テーブル
 
-| Column             | Type     | Options     |
-| ------------------ | -------- | ----------- |
-| email              | string   | null: false |
-| password           | string   | null: false |
-| nickname           | string   | null: false |
-| lastname_kanji     | string   | null: false |
-| firstname_kanji    | string   | null: false |
-| lastname_kana      | string   | null: false |
-| firstname_kana     | string   | null: false |
-| birthday_year_id   | integer  | null: false |
-| birthday_month_id  | integer  | null: false |
-| birthday_id        | integer  | null: false |
+| Column             | Type     | Options                   |
+| ------------------ | -------- | ------------------------- |
+| email              | string   | null: false, unique: true |
+| encrypted_password | string   | null: false               |
+| nickname           | string   | null: false               |
+| lastname_kanji     | string   | null: false               |
+| firstname_kanji    | string   | null: false               |
+| lastname_kana      | string   | null: false               |
+| firstname_kana     | string   | null: false               |
+| birthday_year_id   | integer  | null: false               |
+| birthday_month_id  | integer  | null: false               |
+| birthday_id        | integer  | null: false               |
 
 ### Association
 - has_many :items
-- has_many :Purchases
+- has_many :purchases
 - has_many :birthday_months
 - has_many :birthday_years
 - has_many :birthday
@@ -59,6 +59,7 @@
 
 ### Association
 - belongs_to :item
+- belongs_to :user
 - has_one :recipient
 
 ## Recipients テーブル
