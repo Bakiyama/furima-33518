@@ -11,17 +11,12 @@
 | firstname_kanji    | string   | null: false               |
 | lastname_kana      | string   | null: false               |
 | firstname_kana     | string   | null: false               |
-| birthday_year_id   | integer  | null: false               |
-| birthday_month_id  | integer  | null: false               |
-| birthday_id        | integer  | null: false               |
+| birthday           | date     | null: false               |
+
 
 ### Association
 - has_many :items
 - has_many :purchases
-- has_many :birthday_months
-- has_many :birthday_years
-- has_many :birthday
-
 
 ## Items テーブル
 
@@ -50,10 +45,6 @@
 
 | Column         | Type       | Options           |
 | -------------- | ---------- | ----------------- |
-| card_num       | integer    | null: false       |
-| expire_month   | integer    | null: false       |
-| expire_year    | integer    | null: false       |
-| security_num   | integer    | null: false       |
 | user           | references | foreign_key: true |
 | item           | references | foreign_key: true |
 
@@ -76,5 +67,5 @@
 
 ### Association
 - belongs_to :purchase
-- has_many :prefectures
+
 
