@@ -79,13 +79,6 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Password is invalid. Input half-width English, Numbers, and using more than 6 characters.")
     end
   
-    it "パスワードは、半角英数字混合での入力が必須であること" do
-      @user.password = "aaaaaa"
-      @user.password_confirmation = "aaaaaa"
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Password is invalid. Input half-width English, Numbers, and using more than 6 characters.")
-    end
-  
     it "ユーザー本名は、名字と名前がそれぞれ必須であること(姓がない場合)" do
       @user.lastname_kanji = nil
       @user.valid?
@@ -122,6 +115,18 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Firstname kana is invalid. Input full-width katakana characters.")
     end
   
+    it  "lastname_kanaは、半角文字だと登録できないこと" do
+      @user.lastname_kana = "Yamada"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Lastname kana is invalid. Input full-width katakana characters.")
+    end
+    
+    it "firstname_kanaは、半角文字だと登録できないこと" do
+      @user.firstname_kana = "Yamada"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Firstname kana is invalid. Input full-width katakana characters.")
+    end
+
     it "ユーザー本名のフリガナは、名字と名前でそれぞれ必須であること（姓なし）" do
       @user.lastname_kana = nil
       @user.valid?
@@ -134,18 +139,6 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Firstname kana can't be blank", "Firstname kana is invalid. Input full-width katakana characters.")
     end
 
-    it  "lastname_kanaは、全角（カタカナ）での入力が必須であること" do
-      @user.lastname_kana = "やまだ"
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Lastname kana is invalid. Input full-width katakana characters.")
-    end
-    
-    it "firstname_kanaは、全角（カタカナ）での入力が必須であること" do
-      @user.firstname_kana = "たろう"
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Firstname kana is invalid. Input full-width katakana characters.")
-    end
-  
     it "生年月日が必須であること" do
       @user.birthday = nil
       @user.valid?
