@@ -13,6 +13,7 @@ class Item < ApplicationRecord
     validates :name
     validates :explain
     validates :price, format: {with: /\A[0-9]+\z/, message: "is invalid. Input half-width number."}
+    validates :image
   end
 
   with_options numericality: { other_than: 1 }, presence: true  do
@@ -23,7 +24,9 @@ class Item < ApplicationRecord
     validates :ship_id
   end
 
-  validates_inclusion_of :price, in:300..9999999
+  validates_inclusion_of :price, in:300..9999999, message: "is invalid."
+
+
 end
 
 # 商品画像を1枚つけることが必須であること@
