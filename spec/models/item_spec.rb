@@ -5,6 +5,12 @@ RSpec.describe Item, type: :model do
     @item = FactoryBot.build(:item)
   end
 
+  context '出品できる時' do
+    it "全ての欄を入力していると保存ができること" do
+      expect(@item).to be_valid
+    end
+  end
+
   context '出品できない時' do
     it "商品画像を1枚つけることが必須であること" do
       @item.image = nil
@@ -59,15 +65,46 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Price can't be blank", "Price is invalid. Input half-width number.", "Price is invalid.")
     end
+
+    it "カテゴリーの情報は、1を選択している場合保存できないこと" do
+      @item.category_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Category must be other than 1")
+    end
+    
+    it "商品の状態について、1を選択している場合保存できないこと" do
+      @item.condition_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Condition must be other than 1")
+    end
+    
+    it "配送料の負担について、1を選択している場合保存できないこと" do
+      @item.deliver_fee_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Deliver fee must be other than 1")
+    end
+    
+    it "発送元の地域について、1を選択している場合保存できないこと" do
+      @item.area_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Area must be other than 1")
+    end
+    
+    it "発送までの日数について、1を選択している場合保存できないこと" do
+      @item.ship_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Ship must be other than 1")
+    end
+    
     
     it "価格が300円未満では登録できないこと" do
-      @item.price = "299"
+      @item.price = 299
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is invalid.")
     end
 
     it "価格が1000万円以上では登録できないこと" do
-      @item.price = "10000000"
+      @item.price = 10000000
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is invalid.")
     end
