@@ -12,11 +12,11 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :explain
-    validates :price, format: {with: /\A[0-9]+\z/, message: "is invalid. Input half-width number."}
+    validates :price, format: { with: /\A[0-9]+\z/, message: 'is invalid. Input half-width number.' }
     validates :image
   end
 
-  with_options numericality: { other_than: 1 }, presence: true  do
+  with_options numericality: { other_than: 1 }, presence: true do
     validates :category_id
     validates :condition_id
     validates :deliver_fee_id
@@ -24,7 +24,5 @@ class Item < ApplicationRecord
     validates :ship_id
   end
 
-  validates_inclusion_of :price, in:300..9999999, message: "is invalid."
-
-
+  validates_inclusion_of :price, in: 300..9_999_999, message: 'is invalid.'
 end
