@@ -17,8 +17,8 @@ class UserPurchase
 
   validates :address, presence: true
 
-  with_options format: { with: /\A[0-9]{6,11}+\z/, message: 'is invalid. Input half-width number.' }, presence: true do
-    validates :telphone
+  with_options format: { with: /\A\d{11}\z/, message: 'is invalid. Input 11 half-width number or less.' }, presence: true do
+    validates :telephone
   end
 
   def save
