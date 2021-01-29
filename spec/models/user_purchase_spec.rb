@@ -90,5 +90,10 @@ RSpec.describe UserPurchase, type: :model do
       expect(@recipient.errors.full_messages).to include("Telephone is invalid. Input 11 half-width number or less.")
     end
 
+    it "token（クレジットカード情報）ないと保存できない事" do
+      @recipient.token = nil
+      @recipient.valid?
+      expect(@recipient.errors.full_messages).to include("Token can't be blank")
+    end
   end
 end
